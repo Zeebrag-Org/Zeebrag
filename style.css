@@ -301,14 +301,30 @@ footer {
 
 /* button  */
 
+ul a{
+    transition: all .2s ease-in-out;
+}
+
+ul a:hover{
+    font-weight: 500;
+    color: #003266;
+}
+
 .get-started {
-    border: 2px solid orange;
+    /* border: 2px solid orange; */
     background-color: orange;
     color: #fff;
     padding: 10px 12px;
     border-radius: 7px;
     cursor: pointer;
-    cursor: pointer;
+}
+
+.get-started a{
+    transition: all .2s ease-in-out;
+}
+
+.get-started:hover a{
+    color: #fff;
 }
 
 
