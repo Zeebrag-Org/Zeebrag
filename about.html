@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
      <link rel="stylesheet" href="style.css">
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeV1kAsAAAAAM0Z72fY7GebaVe9nikB76neN1_p"></script>
     <title>Zeebrag</title>
 </head>
 
@@ -20,12 +22,12 @@
             </div>
             <ul class="d-flex">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">About us</a></li>
+                <li><a href="about.html">About us</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="get-started">
-                <a href="">Get Started →</a>
+                <a href="#" id="get-started-btn">Get Started →</a>
             </div>
 
             <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -57,14 +59,105 @@
         </section>
     </div>
 
-    <footer class="d-flex">
-            <p>Social Media Marketing | Personal Branding | Influencer Marketing | Web Development</p>
-            <div class="icons d-flex">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-instagram"></i>
+    <footer>
+        <div class="footer-main">
+            <div class="footer-content d-flex">
+                <div class="footer-section company-intro">
+                    <div class="footer-logo">
+                        <img src="Zeebrag_logo.jpg" alt="Zeebrag Logo">
+                        <h3>ZEEBRAG</h3>
+                    </div>
+                    <p>Zeebrag is The Best Digital Marketing Company. We help Businesses Grow Online with expert strategies in Social Media Marketing, Personal Branding, Content Creation, Web Development, and More. Our Skilled Team Promises Impressive Results for your success.</p>
+                </div>
+
+                <div class="footer-section quick-links">
+                    <h4>QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section featured-services">
+                    <h4>FEATURED SERVICES</h4>
+                    <ul>
+                        <li><a href="services.html">Social Media Marketing</a></li>
+                        <li><a href="services.html">Personal Branding</a></li>
+                        <li><a href="services.html">Content Creation</a></li>
+                        <li><a href="services.html">Web Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section follow-us">
+                    <h4>FOLLOW THE BEST</h4>
+                    <form id="newsletter-form" class="newsletter-form">
+                        <input type="email" placeholder="Email Address" required>
+                        <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                </div>
             </div>
-            <p>Zeebrag © [2025]</p>
-        </footer>
+        </div>
+
+        <div class="footer-bottom d-flex">
+            <div class="footer-copyright d-flex">
+                <div class="phone-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <p>© Copyright Zeebrag 2025 |</p>
+            </div>
+            <div class="footer-social d-flex">
+                <a href="https://www.instagram.com/zeebrag_com?igsh=Nmo4b2JrZnVzaHJ2" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/zeebrag/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Scroll to top button -->
+        <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+
+        <!-- WhatsApp floating button -->
+        <a href="https://wa.me/918718097486" target="_blank" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </footer>
+
+    <!-- Get Started Modal -->
+    <div id="get-started-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Get Started with Zeebrag</h2>
+            <p>Fill out the form below and we'll get back to you soon!</p>
+            <form id="get-started-form">
+                <div class="form-group">
+                    <label for="gs-name">Name <span class="required">*</span></label>
+                    <input type="text" id="gs-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="gs-email">Email <span class="required">*</span></label>
+                    <input type="email" id="gs-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="gs-phone">Phone <span class="required">*</span></label>
+                    <input type="tel" id="gs-phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="gs-message">Message (Optional)</label>
+                    <textarea id="gs-message" name="message" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <div id="recaptcha-badge" style="margin: 10px 0; font-size: 0.85rem; color: #666;">
+                        This site is protected by reCAPTCHA and the Google 
+                        <a href="https://policies.google.com/privacy" target="_blank" style="color: #ff8400;">Privacy Policy</a> and 
+                        <a href="https://policies.google.com/terms" target="_blank" style="color: #ff8400;">Terms of Service</a> apply.
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
 
     <script src="index.js"></script>
         
