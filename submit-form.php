@@ -7,7 +7,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-$secret = "6LeV1kAsAAAAAOA6iT21qjixo4YpnoFfswiO_QPf";
+$secret = getenv('RECAPTCHA_SECRET'); // set this in your server environment
 
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
@@ -25,37 +25,42 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-if (empty($recaptchaResponse)) {
-    echo json_encode(['success' => false, 'message' => 'Please complete the reCAPTCHA verification.']);
-    exit;
-}
+// If reCAPTCHA is configured and the client supplied a token, verify it.
+if (!empty($secret) && !empty($recaptchaResponse)) {
+    $verifyURL = "https://www.google.com/recaptcha/api/siteverify";
+    $postData = http_build_query([
+        'secret' => $secret,
+        'response' => $recaptchaResponse,
+        'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+    ]);
 
-$verifyURL = "https://www.google.com/recaptcha/api/siteverify";
-$postData = http_build_query([
-    'secret' => $secret,
-    'response' => $recaptchaResponse,
-    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
-]);
+    $options = [
+        'http' => [
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => $postData
+        ]
+    ];
 
-$options = [
-    'http' => [
-        'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-        'method' => 'POST',
-        'content' => $postData
-    ]
-];
+    $context = stream_context_create($options);
+    $verify = @file_get_contents($verifyURL, false, $context);
 
-$context = stream_context_create($options);
-$verify = @file_get_contents($verifyURL, false, $context);
-
-if ($verify === false) {
-    error_log('reCAPTCHA verification request failed');
-} else {
-    $captcha = json_decode($verify);
-    if (!$captcha || !$captcha->success) {
-        $errorCodes = isset($captcha->{'error-codes'}) ? implode(', ', $captcha->{'error-codes'}) : 'Unknown error';
-        error_log('reCAPTCHA verification failed: ' . $errorCodes);
+    if ($verify === false) {
+        error_log('reCAPTCHA verification request failed');
+        echo json_encode(['success' => false, 'message' => 'reCAPTCHA verification request failed on server.']);
+        exit;
     }
+
+    $captcha = json_decode($verify);
+    if (!$captcha || empty($captcha->success)) {
+        $errorCodes = isset($captcha->{'error-codes'}) ? implode(', ', $captcha->{'error-codes']) : 'Unknown error';
+        error_log('reCAPTCHA verification failed: ' . $errorCodes);
+        echo json_encode(['success' => false, 'message' => 'reCAPTCHA verification failed.', 'errors' => $errorCodes]);
+        exit;
+    }
+} else {
+    // No secret or no response token — skip reCAPTCHA verification so forms continue to work.
+    error_log('reCAPTCHA not configured or response missing — skipping verification.');
 }
 
 $to = "contact@zeebrag.com";

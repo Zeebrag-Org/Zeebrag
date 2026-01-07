@@ -9,12 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <!-- Google reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeV1kAsAAAAAM0Z72fY7GebaVe9nikB76neN1_p"></script>
+    <!-- reCAPTCHA removed to allow form submission when unavailable -->
     <title>Zeebrag</title>
 </head>
 
-<body>
+<body id="top">
     <header>
         <nav class="d-flex">
             <div id="logo">
@@ -27,7 +26,7 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="get-started">
-                <a href="#" id="get-started-btn">Get Started →</a>
+                <a href="#top">Get Started →</a>
             </div>
 
             <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -121,6 +120,16 @@
                         <li><a href="services.html">Services</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
+
+                    <!-- social icons moved here under Quick Links -->
+                    <div class="footer-social-links" aria-label="Follow us">
+                        <a href="https://www.instagram.com/zeebrag_com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/zeebrag/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="footer-section featured-services">
@@ -144,16 +153,7 @@
         </div>
 
         <div class="footer-bottom d-flex">
-            <div class="footer-copyright d-flex">
-                <div class="phone-icon">
-                    <i class="fa-solid fa-phone"></i>
-                </div>
-                <p>© Copyright Zeebrag 2025 |</p>
-            </div>
-            <div class="footer-social d-flex">
-                <a href="https://www.instagram.com/zeebrag_com?igsh=Nmo4b2JrZnVzaHJ2" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/zeebrag/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            </div>
+            <p>© Copyright Zeebrag 2025</p>
         </div>
 
         <!-- Scroll to top button -->
@@ -279,13 +279,7 @@
                     <label for="gs-message">Message (Optional)</label>
                     <textarea id="gs-message" name="message" rows="4"></textarea>
                 </div>
-                <div class="form-group">
-                    <div id="recaptcha-badge" style="margin: 10px 0; font-size: 0.85rem; color: #666;">
-                        This site is protected by reCAPTCHA and the Google 
-                        <a href="https://policies.google.com/privacy" target="_blank" style="color: #ff8400;">Privacy Policy</a> and 
-                        <a href="https://policies.google.com/terms" target="_blank" style="color: #ff8400;">Terms of Service</a> apply.
-                    </div>
-                </div>
+                <!-- reCAPTCHA badge removed -->
                 <button type="submit" class="submit-btn">Submit</button>
             </form>
         </div>
